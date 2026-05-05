@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrimeLanding — דף נחיתה (שיעור 2)</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="page-wrap">
+    <header class="site-header">
+      <a class="logo" href="#"><span class="logo-accent">Prime</span>Landing</a>
+
+      <nav class="main-nav" aria-label="ניווט ראשי">
+        <ul>
+          <li><a href="#hero">בית</a></li>
+          <li><a href="#benefits">יתרונות</a></li>
+          <li><a href="#signup">הרשמה</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="hero" class="hero-section">
+        <div class="hero-content">
+          <p class="eyebrow"><span aria-hidden="true">●</span> פרויקט HTML ראשון</p>
+          <h1>דף נחיתה שמוכן לשלב הבא</h1>
+          <p>
+            נבנה מבנה ברור עם <code>header</code>, <code>main</code>,
+            <code>section</code> ו-<code>footer</code>, ובמקביל CSS חיצוני בקובץ
+            נפרד — מתאים להמשך עם JavaScript.
+          </p>
+          <div class="cta-row">
+            <a class="primary-link" href="#signup">להרשמה</a>
+            <span class="cta-hint span-muted">לא חייבים להבין הכל בשיעור הראשון — רק למקם נכון.</span>
+          </div>
+        </div>
+
+        <img
+          class="hero-image"
+          src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+          alt="מסך מחשב עם קוד פתוח בעורך קוד"
+          width="800"
+          height="533"
+        >
+      </section>
+
+      <section id="benefits" class="benefits-section">
+        <h2>למה ללמוד דרך פרויקט?</h2>
+        <div class="benefits-intro">
+          <p>כל שורת קוד מתחברת לתוצאה שאפשר לראות ב‑Live Server.</p>
+        </div>
+        <ul class="benefits-list">
+          <li>רואים תוצאה אמיתית בדפדפן.</li>
+          <li>מבינים למה כל תגית קיימת.</li>
+          <li>מתכוננים לעבודה עם JavaScript.</li>
+        </ul>
+      </section>
+
+      <section class="process-section">
+        <h2>איך זה עובד?</h2>
+        <ol>
+          <li>נרשמים דרך הטופס.</li>
+          <li>מקבלים קישור לתרגול.</li>
+          <li>בונים דף נחיתה אישי.</li>
+        </ol>
+      </section>
+
+      <section id="signup" class="signup-section">
+        <h2>הצטרפו לרשימת העדכונים</h2>
+        <p class="signup-desc">
+          השאירו פרטים — בשיעורי JavaScript נחבר התנהגות אמיתית לשדות האלה.
+        </p>
+
+        <form id="signupForm" class="signup-form">
+          <label for="fullName">שם מלא</label>
+          <input
+            id="fullName"
+            name="fullName"
+            type="text"
+            autocomplete="name"
+            placeholder="לדוגמה: דנה כהן"
+          >
+
+          <label for="email">אימייל</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="name@example.com"
+          >
+
+          <button id="submitButton" type="submit">שליחה</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 PrimeLanding. תוצר התרגול לשיעור 2 בקורס.</p>
+      <a href="#hero">חזרה לראש הדף</a>
+    </footer>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

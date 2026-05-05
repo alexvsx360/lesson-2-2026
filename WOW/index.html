@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WOW · שני חדרים · CSS תלת־ממד</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="page-head">
+    <p class="tag">שיעור 2</p>
+    <h1>חדר מינימלי בתלת־ממד</h1>
+    <p class="lede">שתי קומות זו מתחת לזו — לכל חדר רצפה, תקרה, שלוש תמונות כלבים ונורה. למעלה ולמטה <strong>תמונות שונות</strong>. בלי JavaScript.</p>
+  </header>
+
+  <div class="stage" role="img" aria-label="תצוגת שני חדרים תלת מימדיים">
+    <div class="orbit">
+      <div class="stack">
+        <div class="room room--tier room--tier-a" aria-label="חדר עליון">
+          <div class="slab slab--floor"></div>
+          <div class="slab slab--ceiling">
+            <span class="pendant" aria-hidden="true"></span>
+          </div>
+          <div class="slab slab--ceiling-edge" aria-hidden="true"></div>
+         
+        
+        </div>
+
+        <div class="room room--tier room--tier-b" aria-label="חדר תחתון">
+         
+          
+          <div class="slab slab--ceiling-edge" > <figure class="tile">
+            <img
+              src="images/floor.jpg"
+              alt="טקסטורת לוחות עץ חומים — Pixabay"
+              width="1280"
+              height="851"
+            >
+          </figure></div>
+          <div class="slab slab--back">
+            <figure class="tile tile--video">
+              <video
+                src="images/11622179-hd_1080_1920_30fps.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto"
+                title="סרטון כלבים — קובץ MP4 מקומי"
+              ></video>
+            </figure>
+          </div>
+          <div class="slab slab--side slab--side-l">
+            <figure class="tile tile--tall">
+              <img
+                src="https://cdn.pixabay.com/photo/2016/02/08/19/03/puppy-1187270_1280.jpg"
+                alt="גור כלבים — Pixabay"
+                width="640"
+                height="427"
+              >
+            </figure>
+          </div>
+          <div class="slab slab--side slab--side-r">
+            <figure class="tile tile--wide">
+              <img
+                src="https://cdn.pixabay.com/photo/2020/06/29/09/20/dog-5352050_1280.png"
+                alt="כלב — Pixabay"
+                width="640"
+                height="640"
+              >
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="page-foot">
+    <p><strong>קומה עליונה:</strong>
+      <a href="https://pixabay.com/photos/dog-7414059/" target="_blank" rel="noopener noreferrer">dog‑7414059</a> ·
+      <a href="https://pixabay.com/photos/dog-2556796/" target="_blank" rel="noopener noreferrer">dog‑2556796</a> ·
+      <a href="https://pixabay.com/photos/dog-6945696/" target="_blank" rel="noopener noreferrer">dog‑6945696</a>
+    </p>
+    <p><strong>קומה תחתונה:</strong>
+      רצפה
+      (<a href="https://pixabay.com/photos/wood-boards-texture-wooden-brown-1853403/" target="_blank" rel="noopener noreferrer">Pixabay · wood‑1853403</a>). תמונות:
+      <a href="https://www.pexels.com/video/11622179/" target="_blank" rel="noopener noreferrer">Pexels · סרטון 11622179 (גרסה מקומית ב־MP4)</a> ·
+      <a href="https://pixabay.com/photos/puppy-1187270/" target="_blank" rel="noopener noreferrer">puppy‑1187270</a> ·
+      <a href="https://pixabay.com/photos/dog-5352050/" target="_blank" rel="noopener noreferrer">dog‑5352050</a>
+    </p>
+  </footer>
+</body>
+</html>

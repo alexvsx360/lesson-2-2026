@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript - שיעור 2: מבנה סמנטי, תוכן וטפסים</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+  <div class="slideshow-container">
+    <div class="top-bar">
+      <div class="progress"><div id="progressFill"></div></div>
+      <div id="slideCounter">1 / 32</div>
+    </div>
+
+    <div class="slide active">
+      <h1 class="title-main">שיעור 2</h1>
+      <h2 class="title-sub">מבנה סמנטי, תוכן וטפסים</h2>
+      <p class="subtitle">בונים את השלד והתוכן של דף הנחיתה: Header, Hero, יתרונות וטופס הרשמה שמוכן ל-JavaScript.</p>
+    </div>
+
+    <div class="slide">
+      <h2>מה נבנה היום?</h2>
+      <div class="grid two-cols">
+        <div class="card accent">
+          <h3>דף נחיתה אמיתי</h3>
+          <ul>
+            <li>כותרת עליונה עם ניווט.</li>
+            <li>אזור Hero שמציג את המסר המרכזי.</li>
+            <li>אזור יתרונות שמסביר למה המוצר כדאי.</li>
+            <li>טופס הרשמה או יצירת קשר.</li>
+          </ul>
+        </div>
+        <div class="card accent-2">
+          <h3>הכנה ל-JavaScript</h3>
+          <ul>
+            <li>נשתמש ב-<code>id</code> לשדות שנרצה לתפוס בהמשך.</li>
+            <li>נשתמש ב-<code>class</code> לסידור ועיצוב עתידי.</li>
+            <li>נבנה טופס תקין עם <code>label</code> לכל שדה.</li>
+            <li>נשמור על מבנה ברור שקל לקרוא בקוד.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note"><strong>מטרה:</strong> בסוף השיעור יש לנו דף נחיתה עם HTML תקני ויחד עם זה מתרגלים מה נכנס כבר עכשיו ל-<code>css/style.css</code>: אחרי כל שלב בהוראות נראה <strong>איך הדף נראה עם HTML בלבד</strong> ובשקופית המשך <strong>איך נראית תוספת ה-CSS</strong>.</div>
+    </div>
+
+    <div class="slide">
+      <h2>מערך השיעור</h2>
+      <div class="step-box"><h4>שעה 1 - סמנטיקה וחלוקה</h4><p>נבין למה לא כל דבר צריך להיות <code>div</code>, ונשתמש ב-<code>header</code>, <code>main</code>, <code>section</code> ו-<code>footer</code>.</p></div>
+      <div class="step-box"><h4>שעה 2 - מדיה ותוכן</h4><p>נוסיף Hero, תמונה מרכזית, רשימת יתרונות ותוכן שמתאים לדף נחיתה.</p></div>
+      <div class="step-box"><h4>שעה 3 - טפסים והכנה ל-JS</h4><p>נבנה טופס הרשמה עם <code>label</code>, <code>input</code>, <code>button</code> ו-<code>id</code> לכל שדה חשוב.</p></div>
+      <div class="info-box"><h4>תצוגה מקדימה בשקופיות</h4><p>בכל אזור (שלד, Header, Hero, תמונה, יתרונות, תהליך, Footer, טופס) יש טור קוד משמאל ותצוגה מקדימה מימין. כך רואים בדיוק <strong>איך הצטבר הקוד ובאיזה מראה בסיום השלב.</strong></p></div>
+    </div>
+
+    <div class="slide">
+      <h2>נקודת פתיחה: מבנה הפרויקט</h2>
+      <p>נמשיך לעבוד מתוך תיקיית פרויקט מסודרת. בכל תרגיל פותחים את התיקייה הראשית ב-VS Code, לא קובץ בודד.</p>
+      <pre><code class="language-markup">landing-page/
+├── index.html
+├── css/
+│   └── style.css
+└── js/
+    └── script.js</code></pre>
+      <div class="success-example"><h4>תיקיית <code dir="ltr" class="language-text">landing-page/</code> בתוך שיעור 2</h4><p>במאגר של הקורס קיימת כבר גרסת הדף המלא כפי שלומדים בהדרגה בשקופיות — אפשר לפתוח אותה בנפרד ובלשונית חדשה (שקופית 29). מומלץ לפתוח את התיקייה עם Live Server מתוך <strong>שרשור התיקיות הראשית</strong> במחשב שלכם, לא מתוך המצגת.</p></div>
+      <div class="warning-box"><h4>דגש למדריך</h4><p>לפני שמתחילים לכתוב, לבדוק אצל כולם ש-VS Code פתוח על התיקייה הראשית ושכל הקבצים נמצאים במקום הנכון.</p></div>
+    </div>
+
+    <div class="slide">
+      <h2>למה סמנטיקה חשובה?</h2>
+      <p>סמנטיקה היא שימוש בתגיות שמתארות את המשמעות של האזור בדף, לא רק את המראה שלו.</p>
+      <div class="comparison-box">
+        <div class="comparison-item">
+          <h4>פחות ברור</h4>
+          <pre><code class="language-markup">&lt;div&gt;
+  &lt;div&gt;לוגו ותפריט&lt;/div&gt;
+  &lt;div&gt;תוכן מרכזי&lt;/div&gt;
+  &lt;div&gt;סוף הדף&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+        <div class="comparison-item">
+          <h4>יותר מקצועי</h4>
+          <pre><code class="language-markup">&lt;header&gt;לוגו ותפריט&lt;/header&gt;
+&lt;main&gt;תוכן מרכזי&lt;/main&gt;
+&lt;footer&gt;סוף הדף&lt;/footer&gt;</code></pre>
+        </div>
+      </div>
+      <div class="info-box"><h4>המסר לתלמידים</h4><p>הדפדפן, קוראי מסך, מנועי חיפוש ומפתחים אחרים מבינים טוב יותר את הדף כשהתגיות מתארות את התפקיד שלהן.</p></div>
+    </div>
+
+    <div class="slide">
+      <h2>התגיות הסמנטיות של היום + <code dir="ltr">div</code> ו-<code dir="ltr">span</code></h2>
+      <div class="grid two-cols">
+        <div class="card"><h3><code>&lt;header&gt;</code></h3><p>האזור העליון של הדף. בדרך כלל כולל לוגו, שם אתר ותפריט ניווט.</p></div>
+        <div class="card"><h3><code>&lt;main&gt;</code></h3><p>התוכן המרכזי והייחודי של הדף. בדרך כלל מופיע פעם אחת בעמוד.</p></div>
+        <div class="card"><h3><code>&lt;section&gt;</code></h3><p>חלק בתוך התוכן המרכזי, למשל Hero, יתרונות, טופס או המלצות.</p></div>
+        <div class="card"><h3><code>&lt;footer&gt;</code></h3><p>האזור התחתון של הדף. כולל זכויות יוצרים, קישורים או פרטי קשר.</p></div>
+      </div>
+      <h3 dir="rtl" style="margin-top:20px;">מתי משתמשים ב-<code>div</code>?</h3>
+      <div class="comparison-box">
+        <div class="comparison-item"><h4>מה הוא עושה?</h4><p><code>&lt;div&gt;</code> הוא <strong>קופסת מבנה</strong> בשורה משל עצמו (ברירת מחדל: <code dir="ltr">display: block</code>). הוא לא מתאר מה יש בתוך הקופסה, ולכן <strong>אין משמעות סמנטית</strong> לדפדפן או לקוראי מסך.</p></div>
+        <div class="comparison-item"><h4>למה משתמשים בו בעולם האמיתי?</h4><ul><li>לקבץ כמה אלמנטים שנרצה לעצב יחד (למשל שורת לוגו + תפריט).</li><li>לפתוח תבנית פריסה (בשיעורים הבאים הרבה פריסות נשענות על <code>div</code> בשילוב עם CSS).</li><li>להוסיף <code class="language-text">class</code> אחד משותף למספר פריטים.</li></ul></div>
+      </div>
+      <h3 dir="rtl" style="margin-top:14px;">ומה עם <code>span</code>?</h3>
+      <div class="grid two-cols">
+        <div class="card accent"><h3>בלי שבירת שורה</h3><p><code>&lt;span&gt;</code> הוא <strong>קופסה בתוך שורה</strong> (ברירת מחדל: לא שובר תיבה משל עצמו). מתאים לטקסט קטן שרוצים להדגיש, לצבוע או למקד בלי לשנות את המבנה.</p></div>
+        <div class="card accent-2"><h3>דוגמה טיפוסית בדף הנחיתה</h3><p>למשל בשם האתר: <code dir="ltr" class="language-markup">&lt;span class="logo-accent"&gt;Prime&lt;/span&gt;Landing</code>. שניהם יושבים באותה שורת טקסט בלוגו, אך אפשר לתת למילה ראשונה צבע אחר ב-CSS בעזרת <code class="language-text">logo-accent</code>.</p></div>
+      </div>
+      <div class="info-box"><h4>הכלל מהניסיון</h4><p>אם התגית מתארת <strong>תפקיד</strong> בתמונה המלאה — נעדיף <code>header</code>, <code>nav</code>, <code>section</code>. אם רק צריך צעד ארגון או עיצוב — <code>div</code> ו-<code>span</code>. בפרויקט <code dir="ltr" class="language-text">landing-page/</code> משתמשים ב-<code>div</code> בתוך ה-Hero ל-<code class="language-text">hero-content</code> וב-<code class="language-text">cta-row</code>, וב-<code>span</code> בלוגו ובשורות עזר.</p></div>
+      <div class="note"><strong>חשוב:</strong> מתחילים מסמנטיקה מתאימה (<code>header</code>, <code>nav</code>, <code>main</code>…) ומשתמשים ב-<code>div</code> בעיקר לקיבוץ או לפריסה כשלא קיימת תגית שמתארת טוב את האזור.</div>
+    </div>
+
+    <div class="slide">
+      <h2>שלד ראשוני לדף הנחיתה</h2>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label" dir="rtl">קוד בשלב זה (<code class="language-text">index.html</code>)</span>
+          <pre><code class="language-markup">&lt;body&gt;
+  &lt;header&gt;
+    &lt;!-- לוגו ותפריט --&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;section&gt;
+      &lt;!-- Hero --&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+      &lt;!-- יתרונות --&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+      &lt;!-- טופס הרשמה --&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;!-- סוף הדף --&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label" dir="rtl">תצוגה מקדימה: הרגע עם שלד סמנטי בלבד (עדיין בלי <code class="language-text">css/style.css</code>)</span>
+          <div class="l2-mini-browser l2-pv-skeleton">
+            <div class="l2-mini-chrome">📄 index.html • דף נחיתה</div>
+            <div class="l2-mini-body">
+              <div class="lp-header"><span class="lp-tag">&lt;header&gt;</span> לוגו ותפריט</div>
+              <div class="lp-main">
+                <span class="lp-tag">&lt;main&gt;</span>
+                <div class="lp-section-h lp-section"><span class="lp-tag">&lt;section&gt;</span> Hero</div>
+                <div class="lp-section-b lp-section"><span class="lp-tag">&lt;section&gt;</span> יתרונות</div>
+                <div class="lp-section-s lp-section"><span class="lp-tag">&lt;section&gt;</span> הרשמה</div>
+              </div>
+              <div class="lp-footer"><span class="lp-tag">&lt;footer&gt;</span> סיום דף</div>
+            </div>
+          </div>
+          <div class="note" style="margin-top:10px;"><strong>המסר:</strong> בשלב זה הבנת המבנה חשובה יותר מהמראה. עוד רגע מוסיפים את תוכן ה-HTML בתוך כל תגית, ושקופיות ייעודיות מראות מה להוסיף ל-<code>css/style.css</code>.</div>
+        </div>
+      </div>
+      <div class="success-example"><h4>מה הרווחנו?</h4><p>עוד לפני עיצוב, אפשר להבין את הדף רק מקריאת שמות התגיות הסמנטיות.</p></div>
+    </div>
+
+    <div class="slide">
+      <h2>Header: לוגו ותפריט</h2>
+      <p>ה-Header הוא נקודת הכניסה לדף. הוא צריך להיות קצר, ברור, ולתת גישה לאזורים המרכזיים.</p>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">קוד בשלב זה (<code class="language-text">index.html</code> בלבד)</span>
+          <pre><code class="language-markup">&lt;header class="site-header"&gt;
+  &lt;a class="logo" href="#"&gt;PrimeLanding&lt;/a&gt;
+
+  &lt;nav class="main-nav" aria-label="ניווט ראשי"&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="#hero"&gt;בית&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#benefits"&gt;יתרונות&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#signup"&gt;הרשמה&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label">איך זה נראה בדפדפן <strong>רק עם HTML</strong> (ברירות מחדל של הדפדפן)</span>
+          <div class="l2-mini-browser is-html-only">
+            <div class="l2-mini-chrome">📄 localhost — דף הנחיתה</div>
+            <div class="l2-mini-body">
+              <header class="site-header lp-header">
+                <a class="logo" href="#">PrimeLanding</a>
+                <nav class="main-nav" aria-label="ניווט ראשי">
+                  <ul>
+                    <li><a href="#hero">בית</a></li>
+                    <li><a href="#benefits">יתרונות</a></li>
+                    <li><a href="#signup">הרשמה</a></li>
+                  </ul>
+                </nav>
+              </header>
+              <p dir="rtl" style="margin:14px 0 0;color:#64748b;font-size:0.74rem;"><em>מתחת: שאר החלקים של הדף יתפסו את המקום בשקופיות הבאות...</em></p>
+            </div>
+          </div>
+          <div class="note" style="margin-top:10px;"><strong>שימו לב:</strong> הקישורים עם <code>#hero</code> וכן הלאה מטרתם להגיע ל-<code>id</code> של אזורים. בשקופית הבאה ניצור בהירות ויזואלית עם חוקים ב-<code class="language-text">css/style.css</code>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>מה מוסיפים ל-<code class="language-text">css/style.css</code>? Header וניווט</h2>
+      <p>אחרי שיש HTML לכותרת, מוסיפים חוקים שמארגנים את הלוגו ומחישים שהתפריט הוא רשימת קישורים.</p>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">קובץ <code class="language-text">css/style.css</code> (מתווסף או מתעדכן)</span>
+          <pre><code class="language-css">.site-header {
+  padding: 16px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.site-header .logo {
+  margin-left: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  text-decoration: none;
+}
+
+.main-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav li {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.main-nav a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 700;
+}</code></pre>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label">אחרי שמוסיפים את החוקים האלה</span>
+          <div class="l2-mini-browser lp-styled">
+            <div class="l2-mini-chrome">📄 עם CSS — רק אזור הכותרת</div>
+            <div class="l2-mini-body">
+              <div class="lp-header-inner">
+                <a class="lp-logo" href="#">PrimeLanding</a>
+                <nav aria-label="ניווט ראשי">
+                  <ul class="lp-nav-list">
+                    <li><a href="#hero">בית</a></li>
+                    <li><a href="#benefits">יתרונות</a></li>
+                    <li><a href="#signup">הרשמה</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+          <div class="success-example" style="margin-top:10px;"><h4>בשיעור 3 והלאה נעמיק</h4><p>כבר עכשיו רואים איך רק השדה הנכון בוחר מה לעצב: <strong>class בשם מתפקיד</strong> וכללים מתאימים ב-CSS.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>ניווט עם רשימה וקישורים</h2>
+      <div class="grid two-cols">
+        <div class="card accent">
+          <h3>למה <code>ul</code> ו-<code>li</code>?</h3>
+          <p>תפריט הוא בעצם רשימת קישורים. לכן הגיוני לבנות אותו כרשימה.</p>
+        </div>
+        <div class="card accent-2">
+          <h3>למה <code>a</code>?</h3>
+          <p>כל פריט בתפריט הוא קישור למקום אחר בדף או לעמוד אחר.</p>
+        </div>
+      </div>
+      <pre><code class="language-markup">&lt;a href="#signup"&gt;להרשמה&lt;/a&gt;</code></pre>
+      <div class="info-box"><h4>מה עושה הסולמית?</h4><p><code>#signup</code> אומר לדפדפן: עבור לאלמנט שיש לו <code>id="signup"</code>.</p></div>
+    </div>
+
+    <div class="slide">
+      <h2>Hero: המסר המרכזי של הדף</h2>
+      <p>Hero הוא האזור הראשון והבולט בדף נחיתה. הוא עונה מהר על השאלה: מה מציעים לי ולמה כדאי לי להמשיך?</p>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">מתווסף ל-<code class="language-text">index.html</code> בתוך <code class="language-text">&lt;main&gt;</code></span>
+          <pre><code class="language-markup">&lt;section id="hero" class="hero-section"&gt;
+  &lt;div class="hero-content"&gt;
+    &lt;p class="eyebrow"&gt;קורס Frontend למתחילים&lt;/p&gt;
+    &lt;h1&gt;בונים דף נחיתה מקצועי מאפס&lt;/h1&gt;
+    &lt;p&gt;לומדים HTML ו-CSS דרך פרויקט אמיתי שמוכן להמשך עם JavaScript.&lt;/p&gt;
+    &lt;a class="primary-link" href="#signup"&gt;אני רוצה להצטרף&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label"><strong>רק HTML:</strong> אחרי הוספת טקסט ה-Hero מתחת ל-Header שכבר שניהם בסיסיים</span>
+          <div class="l2-mini-browser is-html-only">
+            <div class="l2-mini-chrome">📄 דפדפן — עדיין בלי הקובץ <code dir="ltr" class="language-text">css/style.css</code></div>
+            <div class="l2-mini-body">
+              <header class="site-header">
+                <a class="logo" href="#">PrimeLanding</a>
+                <nav aria-label="ניווט ראשי">
+                  <ul>
+                    <li><a href="#hero">בית</a></li>
+                    <li><a href="#benefits">יתרונות</a></li>
+                    <li><a href="#signup">הרשמה</a></li>
+                  </ul>
+                </nav>
+              </header>
+              <section id="hero" class="hero-section lp-hero-inner">
+                <div class="hero-content">
+                  <p class="eyebrow">קורס Frontend למתחילים</p>
+                  <h1>בונים דף נחיתה מקצועי מאפס</h1>
+                  <p>לומדים HTML ו-CSS דרך פרויקט אמיתי שמוכן להמשך עם JavaScript.</p>
+                  <a class="primary-link" href="#signup">אני רוצה להצטרף</a>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div class="note" style="margin-top:10px;"><strong>בחירה מקצועית:</strong> ל-Hero נתנו <code>id</code> כדי שהניווט יגיע אליו, ו-<code>class hero-section</code> כדי שנוכל למקד בכך את החוקים ב-<code class="language-text">css/style.css</code>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>מה מוסיפים ל-<code class="language-text">css/style.css</code>? טקסט ה-Hero</h2>
+      <p>אחרי שיש HTML לכותרת הרעיונית ובלוק הטקסט של ה-Hero, מוסיפים חוקים שמגרילים באזור, מקרבים טקסט לכפתור, ומתנים צבעים כלליים.</p>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">בנוסף לחוקי ה-Header של השקופית הקודמת</span>
+          <pre><code class="language-css">.hero-section {
+  margin-top: 24px;
+  padding: 32px 24px;
+  border-radius: 16px;
+  background: linear-gradient(#eff6ff, #f9fafb);
+}
+
+.hero-content .eyebrow {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0369a1;
+}
+
+.hero-content h1 {
+  margin: 0 0 12px;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  margin: 0 0 16px;
+  color: #475569;
+}
+
+.primary-link {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #2563eb;
+  text-decoration: none;
+}</code></pre>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label">כך נראה אותו החלק <strong>אחרי החוקים האלה</strong></span>
+          <div class="l2-mini-browser lp-styled lp-has-hero">
+            <div class="l2-mini-chrome">📄 Header + Hero אחרי CSS</div>
+            <div class="l2-mini-body">
+              <div class="lp-header-inner">
+                <a class="lp-logo" href="#">PrimeLanding</a>
+                <nav aria-label="ניווט ראשי">
+                  <ul class="lp-nav-list">
+                    <li><a href="#hero">בית</a></li>
+                    <li><a href="#benefits">יתרונות</a></li>
+                    <li><a href="#signup">הרשמה</a></li>
+                  </ul>
+                </nav>
+              </div>
+              <section id="hero-demo" class="hero-section">
+                <div class="hero-content">
+                  <p class="eyebrow">קורס Frontend למתחילים</p>
+                  <h1>בונים דף נחיתה מקצועי מאפס</h1>
+                  <p>לומדים HTML ו-CSS דרך פרויקט אמיתי שמוכן להמשך עם JavaScript.</p>
+                  <a class="primary-link" href="#signup">אני רוצה להצטרף</a>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>הוספת תמונת Hero (<code class="language-text">&lt;img&gt;</code>)</h2>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">מה מוסיפים ל-<code class="language-text">index.html</code> מתחת/alongside טקסט ה-Hero</span>
+          <pre><code class="language-markup">&lt;img
+  class="hero-image"
+  src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+  alt="מסך מחשב עם קוד פתוח בעורך קוד"
+&gt;</code></pre>
+          <div class="warning-box" style="margin-top:12px;"><h4>לא לוותר על <code>alt</code></h4><p>הטקסט החלופי חשוב לנגישות, למקרה שהתמונה לא נטענת ולכלים סמנטיים נוספים.</p></div>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label"><strong>רק עם HTML חדש על גבי עיצוב כבר מהשלב הקודם</strong> לתמונה אין משבצת — היא מתנפחת ובולטת מתוך כרטיס ה-Hero</span>
+          <div class="l2-mini-browser lp-styled lp-has-hero">
+            <div class="l2-mini-chrome">📄 עם CSS טקסט — בלי משבצת לתמונה עדיין</div>
+            <div class="l2-mini-body">
+              <div class="lp-header-inner">
+                <a class="lp-logo" href="#">PrimeLanding</a>
+                <nav aria-label="ניווט ראשי"><ul class="lp-nav-list"><li><a href="#hero">בית</a></li><li><a href="#benefits">יתרונות</a></li><li><a href="#signup">הרשמה</a></li></ul></nav>
+              </div>
+              <section class="hero-section">
+                <div class="hero-content">
+                  <p class="eyebrow">קורס Frontend למתחילים</p>
+                  <h1>בונים דף נחיתה מקצועי מאפס</h1>
+                  <p>לומדים HTML ו-CSS דרך פרויקט אמיתי.</p>
+                  <a class="primary-link" href="#signup">להרשמה</a>
+                </div>
+                <img class="hero-image" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="מסך מחשב עם קוד" width="400" height="260">
+              </section>
+            </div>
+          </div>
+          <div class="note" style="margin-top:10px;"><strong>למה הבעיה הזו מתכווננת בשקופית הבאה עם CSS?</strong> בלי חוק למשקל ולפינות, תמונה אופיינית אל תיכנס יפה לקומפוזיציה.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>Hero מלא בתוך הקובץ: תוכן + תמונה</h2>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">בלוק מלא שנשמר ב-<code class="language-text">index.html</code></span>
+          <pre><code class="language-markup">&lt;section id="hero" class="hero-section"&gt;
+  &lt;div class="hero-content"&gt;
+    &lt;p class="eyebrow"&gt;פרויקט HTML ראשון&lt;/p&gt;
+    &lt;h1&gt;דף נחיתה שמוכן לשלב הבא&lt;/h1&gt;
+    &lt;p&gt;נבנה מבנה ברור וטופס שנוכל לחבר אליו JavaScript בהמשך.&lt;/p&gt;
+    &lt;a class="primary-link" href="#signup"&gt;להרשמה&lt;/a&gt;
+  &lt;/div&gt;
+
+  &lt;img
+    class="hero-image"
+    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+    alt="מחשב נייד עם קוד פתוח"
+  &gt;
+&lt;/section&gt;</code></pre>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label">אותה רמת עיצוב כמו בשקופית הקודמת (<strong>לפני</strong> הגבלות לתמונה)</span>
+          <div class="l2-mini-browser lp-styled lp-has-hero">
+            <div class="l2-mini-chrome">📄 Hero שלם עם <code dir="ltr" class="language-text">&lt;img&gt;</code></div>
+            <div class="l2-mini-body">
+              <section class="hero-section">
+                <div class="hero-content">
+                  <p class="eyebrow">פרויקט HTML ראשון</p>
+                  <h1>דף נחיתה שמוכן לשלב הבא</h1>
+                  <p>נבנה מבנה ברור וטופס שנוכל לחבר אליו JavaScript בהמשך.</p>
+                  <a class="primary-link" href="#signup">להרשמה</a>
+                </div>
+                <img class="hero-image" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="מחשב נייד" width="400" height="260">
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>מה מוסיפים ל-<code class="language-text">css/style.css</code>? תמונת Hero מתאימה לכרטיס</h2>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">נוסף אחרי כל מה שכבר עיצב את הכותרת וה-Hero</span>
+          <pre><code class="language-css">.hero-section .hero-image {
+  width: 100%;
+  margin-top: 16px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  height: clamp(140px, 22vw, 220px);
+  object-fit: cover;
+}</code></pre>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label">אחרי שמורים ומרעננים עם Live Server</span>
+          <div class="l2-mini-browser lp-styled lp-has-hero lp-has-hero-img">
+            <div class="l2-mini-chrome">📄 משבצת לתמונה — Hero מסודר</div>
+            <div class="l2-mini-body">
+              <section class="hero-section">
+                <div class="hero-content">
+                  <p class="eyebrow">פרויקט HTML ראשון</p>
+                  <h1>דף נחיתה שמוכן לשלב הבא</h1>
+                  <p>נבנה מבנה ברור וטופס שנוכל לחבר אליו JavaScript בהמשך.</p>
+                  <a class="primary-link" href="#signup">להרשמה</a>
+                </div>
+                <img class="hero-image" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="מחשב נייד" width="400" height="260">
+              </section>
+            </div>
+          </div>
+          <div class="success-example" style="margin-top:10px;"><h4>השכבות עד כאן ברצף הקורס</h4><p>Header → ניווט → תיבת טקסט של Hero → עכשיו משבצת לתמונה. כך כל החלקים של המסלול העליון מוכנים לפני שנורדים ליתרון ולהרשמה.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>אזור יתרונות המוצר (<code class="language-text">index.html</code>)</h2>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">מתווסף מתחת ל-Hero בתוך <code class="language-text">&lt;main&gt;</code></span>
+          <pre><code class="language-markup">&lt;section id="benefits" class="benefits-section"&gt;
+  &lt;h2&gt;למה ללמוד דרך פרויקט?&lt;/h2&gt;
+  &lt;ul class="benefits-list"&gt;
+    &lt;li&gt;רואים תוצאה אמיתית בדפדפן.&lt;/li&gt;
+    &lt;li&gt;מבינים למה כל תגית קיימת.&lt;/li&gt;
+    &lt;li&gt;מתכוננים לעבודה עם JavaScript.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;</code></pre>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label"><strong>מרכיב חדש עם HTML בלבד</strong> — הרקע המקווקו מסמן מה נוסף בשלב הזה לפני שנכתוב CSS ייעודי</span>
+          <div class="l2-mini-browser lp-styled lp-has-hero lp-has-hero-img">
+            <div class="l2-mini-chrome">📄 Head + Hero עם CSS + בלוק חדש רק ב-HTML</div>
+            <div class="l2-mini-body">
+              <div class="lp-header-inner">
+                <a class="lp-logo" href="#">PrimeLanding</a>
+                <nav aria-label="ניווט ראשי"><ul class="lp-nav-list"><li><a href="#hero">בית</a></li><li><a href="#benefits">יתרונות</a></li><li><a href="#signup">הרשמה</a></li></ul></nav>
+              </div>
+              <section class="hero-section">
+                <div class="hero-content"><p class="eyebrow">פרויקט</p><h1>Hero מעוצב</h1><p>קצר.</p><a class="primary-link" href="#signup">להרשמה</a></div>
+                <img class="hero-image" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="" width="320" height="180">
+              </section>
+              <section id="benefits" class="benefits-section l2-new-html-block">
+                <h2>למה ללמוד דרך פרויקט?</h2>
+                <ul class="benefits-list">
+                  <li>רואים תוצאה אמיתית בדפדפן.</li>
+                  <li>מבינים למה כל תגית קיימת.</li>
+                  <li>מתכוננים ל-JavaScript.</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+          <div class="info-box" style="margin-top:10px;"><h4>רשימה לא ממוספרת</h4><p>כשאין סדר מחייב בין הפריטים, משתמשים ב-<code>ul</code>.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>מה מוסיפים ל-<code class="language-text">css/style.css</code>? אזור היתרונות</h2>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">מבדילים את כרטיס היתרונות מרקע ה-Hero הכחול</span>
+          <pre><code class="language-css">.benefits-section {
+  margin-top: 32px;
+  padding: 24px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.benefits-section h2 {
+  margin: 0 0 12px;
+}
+
+.benefits-list {
+  margin: 0;
+  padding-right: 20px;
+}</code></pre>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label">אחרי שמוסיפים את החוקים</span>
+          <div class="l2-mini-browser lp-styled lp-has-hero lp-has-hero-img lp-has-benefits">
+            <div class="l2-mini-chrome">📄 Hero + יתרונות עם CSS</div>
+            <div class="l2-mini-body">
+              <div class="lp-header-inner">
+                <a class="lp-logo" href="#">PrimeLanding</a>
+                <nav aria-label="ניווט ראשי"><ul class="lp-nav-list"><li><a href="#hero">בית</a></li><li><a href="#benefits">יתרונות</a></li><li><a href="#signup">הרשמה</a></li></ul></nav>
+              </div>
+              <section class="hero-section">
+                <div class="hero-content"><p class="eyebrow">פרויקט</p><h1>Hero</h1><p>קצר.</p><a class="primary-link" href="#signup">להרשמה</a></div>
+                <img class="hero-image" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="" width="320" height="180">
+              </section>
+              <section id="benefits-demo" class="benefits-section">
+                <h2>למה ללמוד דרך פרויקט?</h2>
+                <ul class="benefits-list">
+                  <li>תוצאה אמיתית בדפדפן.</li>
+                  <li>הבנה של הסמנטיקה.</li>
+                  <li>המשך עם JavaScript.</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>מתי להשתמש ב-Ordered List? (<code class="language-text">index.html</code>)</h2>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">אזור "איך זה עובד?" עם צעדים ממוספרים</span>
+          <pre><code class="language-markup">&lt;section class="process-section"&gt;
+  &lt;h2&gt;איך זה עובד?&lt;/h2&gt;
+  &lt;ol&gt;
+    &lt;li&gt;נרשמים דרך הטופס.&lt;/li&gt;
+    &lt;li&gt;מקבלים קישור לתרגול.&lt;/li&gt;
+    &lt;li&gt;בונים דף נחיתה אישי.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/section&gt;</code></pre>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label"><strong>HTML חדש</strong> — מסומן במסגרת קווקווית עד שנוסיף עיצוב</span>
+          <div class="l2-mini-browser lp-styled lp-has-benefits">
+            <div class="l2-mini-chrome">📄 עם יתרונות מעוצבים + תהליך חדש בלבד ב-HTML</div>
+            <div class="l2-mini-body" style="font-size:0.76rem;">
+              <section class="benefits-section"><h2>יתרונות קצרים</h2><ul class="benefits-list"><li>פריט.</li></ul></section>
+              <section class="process-section l2-new-html-block"><h2>איך זה עובד?</h2><ol><li>נרשמים דרך הטופס.</li><li>מקבלים תרגול.</li><li>בונים דף בעצמכם.</li></ol></section>
+            </div>
+          </div>
+          <div class="note" style="margin-top:10px;"><strong>כלל פשוט:</strong> <code>ul</code> לרשימת נקודות, <code>ol</code> לצעדים לפי סדר.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>מה מוסיפים ל-<code class="language-text">css/style.css</code>? אזור התהליך</h2>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">מפרידים ויזואלית את שלושת השלבים</span>
+          <pre><code class="language-css">.process-section {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 16px;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+}
+
+.process-section ol {
+  margin: 0;
+  padding-right: 20px;
+}</code></pre>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label">אחרי ההוספה ל-<code class="language-text">style.css</code></span>
+          <div class="l2-mini-browser lp-styled lp-has-benefits lp-has-process">
+            <div class="l2-mini-chrome">📄 יתרונות + תהליך מעוצב</div>
+            <div class="l2-mini-body" style="font-size:0.76rem;">
+              <section class="benefits-section"><h2>יתרון</h2><ul class="benefits-list"><li>פריט דוגמה.</li></ul></section>
+              <section class="process-section"><h2>איך זה עובד?</h2><ol><li>צעד ראשון.</li><li>צעד שני.</li><li>צעד שלישי.</li></ol></section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>Footer: סגירת הדף (<code class="language-text">index.html</code>)</h2>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">בדיוק מתחת ל-<code class="language-text">&lt;/main&gt;</code></span>
+          <pre><code class="language-markup">&lt;footer class="site-footer"&gt;
+  &lt;p&gt;© 2026 PrimeLanding. כל הזכויות שמורות.&lt;/p&gt;
+  &lt;a href="#hero"&gt;חזרה לראש הדף&lt;/a&gt;
+&lt;/footer&gt;</code></pre>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label"><strong>רגע ההוספה</strong> — עדיין בלי CSS ל-Footer</span>
+          <div class="l2-mini-browser lp-styled lp-has-process lp-has-benefits">
+            <div class="l2-mini-chrome">📄 גוף הדף + Footer טרי</div>
+            <div class="l2-mini-body" style="font-size:0.76rem;">
+              <section class="process-section"><h2>תהליך</h2><ol><li>א</li><li>ב</li></ol></section>
+              <footer class="site-footer l2-new-html-block">
+                <p>© 2026 PrimeLanding. כל הזכויות שמורות.</p>
+                <a href="#hero">חזרה לראש הדף</a>
+              </footer>
+            </div>
+          </div>
+          <div class="note" style="margin-top:10px;"><strong>טיפ:</strong> הקישור <code>href="#hero"</code> עובד בדיוק כמו בתפריט העליון.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>מה מוסיפים ל-<code class="language-text">css/style.css</code>? Footer קריא ונקי</h2>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">מקבעים שהסיום יירגע ולא יישבטח על האזורים מעל</span>
+          <pre><code class="language-css">.site-footer {
+  margin-top: 40px;
+  padding-top: 16px;
+  font-size: 14px;
+  color: #64748b;
+  border-top: 1px solid #e5e7eb;
+}
+
+.site-footer a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}</code></pre>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label">אחרי שמוסיפים את החוקים</span>
+          <div class="l2-mini-browser lp-styled lp-has-process lp-has-benefits lp-has-footer">
+            <div class="l2-mini-chrome">📄 Footer מעוצב</div>
+            <div class="l2-mini-body" style="font-size:0.76rem;">
+              <section class="benefits-section"><h2>יתרון</h2><ul class="benefits-list"><li>שורה.</li></ul></section>
+              <footer class="site-footer">
+                <p>© 2026 PrimeLanding.</p>
+                <a href="#hero">חזרה לראש הדף</a>
+              </footer>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>טפסים: למה זה חשוב ל-JavaScript?</h2>
+      <p>טופס הוא המקום שבו המשתמש מכניס מידע. בהמשך, JavaScript יוכל לקרוא את המידע, לבדוק אותו ולהגיב.</p>
+      <div class="flow-diagram">
+        <div class="flow-step">המשתמש כותב שם ואימייל</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">HTML מחזיק את השדות</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">JavaScript יתפוס את הערכים בהמשך</div>
+      </div>
+      <div class="warning-box"><h4>דגש קריטי</h4><p>כדי לתפוס שדה ב-JS בקלות, ניתן לו <code>id</code> ייחודי וברור.</p></div>
+    </div>
+
+    <div class="slide">
+      <h2>מבנה בסיסי של טופס (<code class="language-text">index.html</code>)</h2>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">בתוך <code class="language-text">&lt;main&gt;</code> בסוף</span>
+          <pre><code class="language-markup">&lt;section id="signup" class="signup-section"&gt;
+  &lt;h2&gt;רוצים לקבל עדכונים?&lt;/h2&gt;
+
+  &lt;form class="signup-form"&gt;
+    &lt;label for="fullName"&gt;שם מלא&lt;/label&gt;
+    &lt;input id="fullName" type="text" name="fullName"&gt;
+
+    &lt;label for="email"&gt;אימייל&lt;/label&gt;
+    &lt;input id="email" type="email" name="email"&gt;
+
+    &lt;button type="submit"&gt;שליחה&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/section&gt;</code></pre>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label"><strong>רגע ההוספה</strong> במציאות הדף — עדיין בלי משבצת לטופס</span>
+          <div class="l2-mini-browser lp-styled lp-has-footer lp-has-benefits">
+            <div class="l2-mini-chrome">📄 + טופס חדש (HTML)</div>
+            <div class="l2-mini-body" style="font-size:0.74rem;">
+              <footer class="site-footer" style="margin-top:8px;"><p>© 2026</p></footer>
+              <section id="signup" class="signup-section l2-new-html-block" style="margin-top:12px;">
+                <h2>רוצים לקבל עדכונים?</h2>
+                <form class="signup-form" onsubmit="return false;">
+                  <label for="fullName-prev">שם מלא</label>
+                  <input id="fullName-prev" type="text" name="fullNamePrev">
+                  <label for="email-prev">אימייל</label>
+                  <input id="email-prev" type="email" name="emailPrev">
+                  <button type="submit">שליחה</button>
+                </form>
+              </section>
+            </div>
+          </div>
+          <div class="success-example" style="margin-top:10px;"><h4>מה מקצועי כאן?</h4><p>שילוב <code>for</code> ו-<code>id</code> זה לזה ובחירת <code>type</code> נכונה.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2><code>label</code> ו-<code>input</code>: הקשר ביניהם</h2>
+      <p>ה-<code>label</code> מסביר למשתמש מה צריך להקליד. הקישור בין <code>label</code> ל-<code>input</code> נוצר בעזרת <code>for</code> ו-<code>id</code>.</p>
+      <pre><code class="language-markup">&lt;label for="userEmail"&gt;כתובת אימייל&lt;/label&gt;
+&lt;input id="userEmail" type="email" name="userEmail"&gt;</code></pre>
+      <div class="grid two-cols">
+        <div class="card"><h3><code>for="userEmail"</code></h3><p>ה-label מצביע על השדה.</p></div>
+        <div class="card"><h3><code>id="userEmail"</code></h3><p>השדה מקבל מזהה ייחודי בדף.</p></div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>סוגי input שנשתמש בהם</h2>
+      <div class="grid two-cols">
+        <div class="card accent">
+          <h3><code>type="text"</code></h3>
+          <p>מתאים לשם, עיר, תפקיד או כל טקסט כללי.</p>
+          <pre><code class="language-markup">&lt;input id="fullName" type="text"&gt;</code></pre>
+        </div>
+        <div class="card accent-2">
+          <h3><code>type="email"</code></h3>
+          <p>מתאים לכתובת אימייל ונותן לדפדפן בדיקה בסיסית.</p>
+          <pre><code class="language-markup">&lt;input id="email" type="email"&gt;</code></pre>
+        </div>
+      </div>
+      <div class="note"><strong>לא קופצים רחוק מדי:</strong> בשיעור הזה מספיקים טקסט ואימייל. המטרה היא לבנות בסיס טוב.</div>
+    </div>
+
+    <div class="slide">
+      <h2><code>id</code> לעומת <code>class</code></h2>
+      <div class="comparison-box">
+        <div class="comparison-item">
+          <h4><code>id</code></h4>
+          <ul>
+            <li>ייחודי לאלמנט אחד בדף.</li>
+            <li>מתאים לשדות שנרצה לתפוס ב-JS.</li>
+            <li>משמש גם לקישורי עוגן כמו <code>#signup</code>.</li>
+          </ul>
+        </div>
+        <div class="comparison-item">
+          <h4><code>class</code></h4>
+          <ul>
+            <li>אפשר להשתמש באותה class על כמה אלמנטים.</li>
+            <li>מתאים בעיקר לעיצוב ולסידור.</li>
+            <li>עוזר לתת שמות לתפקידים ויזואליים.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="warning-box"><h4>כלל לקורס</h4><p>שדות טופס חשובים מקבלים <code>id</code>. אזורים ועיצובים חוזרים מקבלים <code>class</code>.</p></div>
+    </div>
+
+    <div class="slide">
+      <h2>טופס הרשמה מלא (<code class="language-text">index.html</code>)</h2>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">גרסה מלאה עם <code class="language-text">id</code> לטופס ולכפתור</span>
+          <pre><code class="language-markup">&lt;section id="signup" class="signup-section"&gt;
+  &lt;h2&gt;הצטרפו לרשימת העדכונים&lt;/h2&gt;
+  &lt;p&gt;תרגולים ועדכונים לקורס.&lt;/p&gt;
+
+  &lt;form id="signupForm" class="signup-form"&gt;
+    &lt;label for="fullName"&gt;שם מלא&lt;/label&gt;
+    &lt;input id="fullName" name="fullName"
+      type="text" placeholder="לדוגמה: דנה כהן"&gt;
+
+    &lt;label for="email"&gt;אימייל&lt;/label&gt;
+    &lt;input id="email" name="email"
+      type="email" placeholder="name@example.com"&gt;
+
+    &lt;button id="submitButton"
+      type="submit"&gt;שליחה&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/section&gt;</code></pre>
+          <div class="note" style="margin-top:10px;"><strong>JS בהמשך:</strong> קונסט עם <code>getElementById("signupForm")</code>, <code>"fullName"</code>, <code>"email"</code>, <code>"submitButton"</code>.</div>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label"><strong>HTML בלבד בתצוגת הדף</strong> — עדיין בלי מאגר לעיצוב הטופס</span>
+          <div class="l2-mini-browser lp-styled lp-has-benefits">
+            <div class="l2-mini-chrome">📄 טופס מלא מהקוד</div>
+            <div class="l2-mini-body" style="font-size:0.72rem;">
+              <section id="signup-slide-demo" class="signup-section l2-new-html-block">
+                <h2>הצטרפו לרשימת העדכונים</h2>
+                <p class="signup-desc">תרגולים ועדכונים לקורס.</p>
+                <form id="signupFormSlideDemo" class="signup-form" onsubmit="return false;">
+                  <label for="l2fn">שם מלא</label>
+                  <input id="l2fn" type="text" name="l2fn" placeholder="דנה כהן">
+                  <label for="l2em">אימייל</label>
+                  <input id="l2em" type="email" name="l2em" placeholder="name@example.com">
+                  <button type="submit">שליחה</button>
+                </form>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>מה מוסיפים ל-<code class="language-text">css/style.css</code>? טופס נקי לפני JavaScript</h2>
+      <div class="l2-split">
+        <div class="l2-code-col">
+          <span class="l2-code-label">ממקמים שדות אחד מתחת לשני ומדגישים את הכפתור</span>
+          <pre><code class="language-css">.signup-section {
+  margin-top: 32px;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid #d1d5db;
+  background-color: #fdfdff;
+}
+
+.signup-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.signup-form input {
+  width: 100%;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+}
+
+.signup-form button {
+  margin-top: 4px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 0;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #1d4ed8;
+}</code></pre>
+        </div>
+        <div class="l2-preview-col">
+          <span class="l2-preview-label">אורח חיים עקבי לפני שנוסיף <code dir="ltr" class="language-text">script.js</code></span>
+          <div class="l2-mini-browser lp-styled lp-has-form lp-has-benefits">
+            <div class="l2-mini-chrome">📄 טופס עם CSS מלא בשיעור 2</div>
+            <div class="l2-mini-body" style="font-size:0.72rem;">
+              <section class="benefits-section"><h2>סימולציה קצרה</h2><ul class="benefits-list"><li>שורת יתרון.</li></ul></section>
+              <section id="signup-styled-slide" class="signup-section">
+                <h2>הצטרפו לעדכונים</h2>
+                <p class="signup-desc">מלאו פרטים — זו רק תצוגה במצגת.</p>
+                <form id="signupFormStyledDemo" class="signup-form" onsubmit="return false;">
+                  <label for="l2sf">שם מלא</label>
+                  <input id="l2sf" type="text" name="l2sf">
+                  <label for="l2se">אימייל</label>
+                  <input id="l2se" type="email" name="l2se">
+                  <button type="submit">שליחה</button>
+                </form>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>תצוגה מקומית: הסדר המלא בסוף שיעור 2</h2>
+      <p dir="rtl">כאן מופיע הצירוף של כל מה שבנינו בצורה מכווצת בתוך המצגת. בפרויקט האמיתי אותן שכבות מתווספות בסדר ברור: <strong>כותרת → Hero → תמונה → יתרונות → תהליך → Footer → הרשמה</strong>.</p>
+      <div class="highlight-box"><h4>דף הנחיתה המלא שנלמד (שקופית 29)</h4><p><strong>המצגת הזאת לא מחליפה תצוגה של דף אמיתי.</strong> לחצו למטה על הקישור — ייפתח <code dir="ltr" class="language-text">landing-page/index.html</code> בלשונית חדשה, עם <strong>קבצים נפרדים</strong> ל-HTML (<code dir="ltr" class="language-text">index.html</code>) ול-CSS (<code dir="ltr" class="language-text">css/style.css</code>), וכל קשר ל-JavaScript בקובץ <code dir="ltr" class="language-text">js/script.js</code> בשלב דמו בלבד.</p><p><a class="resource-link" href="landing-page/index.html" target="_blank" rel="noopener noreferrer">פתיחת דף הנחיתה המלא בתצוגת דפדפן</a></p></div>
+      <div class="l2-mini-browser lp-styled lp-has-hero lp-has-hero-img lp-has-benefits lp-has-process lp-has-footer lp-has-form">
+        <div class="l2-mini-chrome">📄 מאותן שכבות — גרסה מכווצת בתוך המצגת (ללא קובץ CSS נפרד)</div>
+        <div class="l2-mini-body">
+          <div class="lp-header-inner">
+            <a class="lp-logo" href="#">PrimeLanding</a>
+            <nav aria-label="ניווט ראשי"><ul class="lp-nav-list"><li><a href="#hero-l2-full">בית</a></li><li><a href="#benefits-l2-full">יתרונות</a></li><li><a href="#signup-l2-full">הרשמה</a></li></ul></nav>
+          </div>
+          <main>
+            <section id="hero-l2-full" class="hero-section">
+              <div class="hero-content">
+                <p class="eyebrow">פרויקט הקורס</p>
+                <h1>דף נחיתה מוכן למעבר יפה ל-JavaScript</h1>
+                <p>HTML ו-CSS מסודרים לפני הלוגיקה.</p>
+                <a class="primary-link" href="#signup-l2-full">ליישור מהיר</a>
+              </div>
+              <img class="hero-image" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="תמונה" width="520" height="320">
+            </section>
+            <section id="benefits-l2-full" class="benefits-section">
+              <h2>למה ללמוד ככה?</h2>
+              <ul class="benefits-list">
+                <li>תוצאה בדפדפן.</li>
+                <li>קריאת קוד הגיונית.</li>
+              </ul>
+            </section>
+            <section class="process-section">
+              <h2>איך זה נראה בשלוש צעדים?</h2>
+              <ol><li>מתחילים.</li><li>בונים.</li><li>משפרים בשיעורים הבאים.</li></ol>
+            </section>
+            <section id="signup-l2-full" class="signup-section">
+              <h2>הישארו מעודכנים</h2>
+              <p class="signup-desc">לא שולחים כלום בתוך המצגת 🙂</p>
+              <form id="signupFinalDemo" class="signup-form" onsubmit="return false;">
+                <label for="l2-fn-final">שם מלא</label>
+                <input id="l2-fn-final" type="text" name="l2-fn-final">
+                <label for="l2-em-final">אימייל</label>
+                <input id="l2-em-final" type="email" name="l2-em-final">
+                <button type="submit">שליחה</button>
+              </form>
+            </section>
+          </main>
+          <footer class="site-footer">
+            <p>© 2026 PrimeLanding • דוגמה בשיעור 2.</p>
+            <a href="#hero-l2-full">ראש הדף</a>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>תרגול בכיתה</h2>
+      <div class="grid two-cols">
+        <div class="card accent">
+          <h3>משימה 1 - שלד סמנטי</h3>
+          <ul>
+            <li>צרו <code>header</code>, <code>main</code> ו-<code>footer</code>.</li>
+            <li>בתוך <code>main</code> צרו שלושה <code>section</code>.</li>
+            <li>תנו לכל section שם class ברור.</li>
+          </ul>
+        </div>
+        <div class="card accent-2">
+          <h3>משימה 2 - תוכן וטופס</h3>
+          <ul>
+            <li>הוסיפו תפריט עם שלושה קישורים.</li>
+            <li>הוסיפו Hero עם כותרת, פסקה ותמונה.</li>
+            <li>הוסיפו טופס עם שם, אימייל וכפתור.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>בדיקת איכות לפני סיום</h2>
+      <div class="questions-list">
+        <div class="question-item"><h4>1. האם יש <code>main</code> אחד בדף?</h4><button class="answer-toggle" data-answer-id="answer1">הצג תשובה</button><div id="answer1" class="answer d-none">כן. בדרך כלל לדף יש אזור תוכן מרכזי אחד.</div></div>
+        <div class="question-item"><h4>2. האם לכל <code>input</code> יש <code>label</code>?</h4><button class="answer-toggle" data-answer-id="answer2">הצג תשובה</button><div id="answer2" class="answer d-none">כן. זה חשוב לנגישות, לשימושיות ולהרגלי עבודה טובים.</div></div>
+        <div class="question-item"><h4>3. האם לכל שדה בטופס יש <code>id</code> ברור?</h4><button class="answer-toggle" data-answer-id="answer3">הצג תשובה</button><div id="answer3" class="answer d-none">כן. בהמשך נשתמש ב-id כדי לקרוא את הערכים עם JavaScript.</div></div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>סיכום ושיעורי בית</h2>
+      <div class="summary-grid">
+        <div class="summary-card"><h3>מה למדנו?</h3><ul><li>מבנה סמנטי לדף.</li><li>תפריט, Hero, תמונה, יתרונות, תהליך, Footer.</li><li>טופס עם label ו-id.</li><li>מתרגלים מתי כותבים רק HTML ומתי מתווספת שכבת CSS ראשונית (<code dir="ltr" class="language-text">css/style.css</code>).</li></ul></div>
+        <div class="summary-card"><h3>שיעורי בית</h3><ul><li>להשלים דף נחיתה עם כל האזורים.</li><li>לגרום למצבי "רק HTML" ו"עם מה שכיסינו בשיעור 2 של CSS".</li><li>לוודא שכל input מקבל label ו-id משמעותי.</li><li>בשיעור 3 צריכים הרחבות עיצוב — תשמשו בשיעור 2 בסיס הגיוני.</li></ul></div>
+        <div class="summary-card"><h3>בשיעור הבא</h3><ul><li>העשרה ובידוד של כל מה שלמדנו כאן מתוך <code dir="ltr" class="language-text">style.css</code>.</li><li>Box Model, צבעים וגרידים מתקדמים יותר.</li></ul></div>
+      </div>
+      <div class="final-note"><h3>סיום שיעור 2</h3><p>לא רק מה מקומן כל אלמנט ב-HTML ידוע, גם ההבנה הראשונה של ההשפעה של <strong>קבצים חיצוניים של CSS על אותן תגיות</strong> מתחילה בשיעור הזה: כך המעבר לשיעור 3 ובהמשך ל-JavaScript נשאר מתמשך.</p></div>
+    </div>
+
+    <div class="nav">
+      <button id="prevBtn" class="slideshow-nav-btn">הקודם ▶</button>
+      <button id="nextBtn" class="slideshow-nav-btn">◀ הבא</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
